@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: MongoDB
+    restart: always
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - dev
+    ports:
+      - 27017:27017
+
+  #mongo-seed:
+  #  build: ./mongo-seed
+  #  links:
+  #    - mongo
+
+volumes:
+  mongo-data:
+
+networks:
+  dev:
+    driver: bridge
+# server connection-string mongodb://localhost:27017/databasename
