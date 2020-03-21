@@ -1,4 +1,4 @@
-import Villain from "../models/villain.schema";
+import Villain from "../models/villain.mongo.schema";
 import boom from "boom";
 
 export const villainFind = async (): Promise<any[]> => {

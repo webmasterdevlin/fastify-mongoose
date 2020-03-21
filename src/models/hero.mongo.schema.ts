@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const HeroSchema = new mongoose.Schema({
+const HeroMongoSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   house: { type: String, required: true },
@@ -8,4 +8,4 @@ const HeroSchema = new mongoose.Schema({
   created_at: { type: Date, default: Date.now }
 });
 
-export default mongoose.model("Hero", HeroSchema, "heroes");
+export default mongoose.model("Hero", HeroMongoSchema, "heroes");

@@ -1,6 +1,6 @@
 import * as controller from "../controllers/hero.controller";
 import { RouteOptions } from "fastify";
-import { schema } from "./documentation/hero.api";
+import { schema } from "./documentation/hero.api.schema";
 
 const getHeroesRoute: RouteOptions = {
   method: "GET",

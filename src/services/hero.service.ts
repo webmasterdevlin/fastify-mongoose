@@ -1,4 +1,4 @@
-import Hero from "../models/hero.schema";
+import Hero from "../models/hero.mongo.schema";
 import boom from "boom";
 
 export const heroFind = async (): Promise<any[]> => {

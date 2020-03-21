@@ -1,6 +1,6 @@
 import * as controller from "../controllers/villain.controller";
 import { RouteOptions } from "fastify";
-import { schema } from "./documentation/villain.api";
+import { schema } from "./documentation/villain.api.schema";
 
 const getVillainsRoute: RouteOptions = {
   method: "GET",
