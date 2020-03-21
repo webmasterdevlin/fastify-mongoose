@@ -1,65 +1,35 @@
-import boom from "boom";
 import { ServerResponse } from "http";
 import { FastifyReply, FastifyRequest } from "fastify";
-import Hero from "../models/hero.schema";
 import { Document } from "mongoose";
+import {
+  heroFind,
+  heroFindById,
+  heroFindByIdAndRemove,
+  heroFindByIdAndUpdate,
+  heroSave
+} from "../services/hero.service";
 
 export const getHeroes = async (
   req: FastifyRequest,
   reply: FastifyReply<ServerResponse>
-): Promise<Document[]> => {
-  try {
-    return await Hero.find().exec();
-  } catch (e) {
-    throw boom.boomify(e);
-  }
-};
+): Promise<Document[]> => await heroFind();
 
 export const deleteHero = async (
   req: FastifyRequest,
   reply: FastifyReply<ServerResponse>
-): Promise<any> => {
-  try {
-    // Hero.deleteOne({ _id: req.params.id }).exec(); // does not return what has been deleted
-    return await Hero.findByIdAndRemove(req.params.id).exec();
-  } catch (e) {
-    throw boom.boomify(e);
-  }
-};
+): Promise<Document> => await heroFindByIdAndRemove(req.params.id);
 
 export const addHero = async (
   req: FastifyRequest,
   reply: FastifyReply<ServerResponse>
-): Promise<Document> => {
-  try {
-    return await new Hero(req.body).save();
-  } catch (e) {
-    throw boom.boomify(e);
-  }
-};
+): Promise<Document> => await heroSave(req.body);
 
 export const updateHero = async (
   req: FastifyRequest,
   reply: FastifyReply<ServerResponse>
-): Promise<any> => {
-  try {
-    return await Hero.findByIdAndUpdate(
-      req.params.id,
-      { ...req.body },
-      { new: true }
-    ).exec();
-  } catch (e) {
-    boom.boomify(e);
-  }
-};
+): Promise<Document> => await heroFindByIdAndUpdate(req.params.id, req.body);
 
 export const getHeroById = async (
   req: FastifyRequest,
   reply: FastifyReply<ServerResponse>
-): Promise<any> => {
-  try {
-    return await Hero.findById(req.params.id).exec();
-  } catch (e) {
-    boom.boomify(e);
-  }
-};
+): Promise<any> => await heroFindById(req.params.id);
