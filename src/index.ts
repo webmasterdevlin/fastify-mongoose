@@ -24,15 +24,18 @@ const start = async (): Promise<void> => {
     process.exit(1);
   }
 };
-start();
 
-// configure DB
-if (process.env.NODE_ENV !== "test") {
-  mongoose
-    .connect(`mongodb://${env.DB_HOST}:${env.DB_NAME}`, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    })
-    .then(() => app.log.info("MongoDB connected..."))
-    .catch(e => app.log.error(e));
-}
+start()
+  .then(() => {
+    // configure DB
+    if (process.env.NODE_ENV !== "test") {
+      mongoose
+        .connect(`mongodb://${env.DB_HOST}:${env.DB_NAME}`, {
+          useNewUrlParser: true,
+          useUnifiedTopology: true
+        })
+        .then(() => app.log.info("MongoDB connected..."))
+        .catch(e => app.log.error(e));
+    }
+  })
+  .catch(e => app.log.error(e));
